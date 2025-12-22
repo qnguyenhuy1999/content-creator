@@ -1,0 +1,8 @@
+packages:
+  - "apps/admin"
+  - "apps/admin-api"
+  - "apps/api"
+  - "apps/web-app"
+  - "apps/web-landing"
+  - "packages/ui"
+  - "packages/*"
