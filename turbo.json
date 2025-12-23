@@ -12,7 +12,8 @@
       "outputs": [
         "dist/**",
         "build/**",
-        "storybook-static/**"
+        "storybook-static/**",
+        ".next/**"
       ]
     },
     "lint": {
@@ -23,6 +24,11 @@
     "format": {
       "dependsOn": [
         "^format"
+      ]
+    },
+    "format:check": {
+      "dependsOn": [
+        "^format:check"
       ]
     },
     "test": {

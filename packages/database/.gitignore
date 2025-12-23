@@ -1,0 +1,7 @@
+# Keep environment variables in root .env
+.env
+.env.local
+.env.production
+
+# Prisma
+node_modules/.prisma

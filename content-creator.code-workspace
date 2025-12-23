@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "content-creator",
+      "path": ".",
+    },
+    {
+      "name": "admin",
+      "path": "apps/admin",
+    },
+    {
+      "name": "admin-api",
+      "path": "apps/admin-api",
+    },
+    {
+      "name": "api",
+      "path": "apps/api",
+    },
+    {
+      "name": "web-app",
+      "path": "apps/web-app",
+    },
+    {
+      "name": "web-landing",
+      "path": "apps/web-landing",
+    },
+    {
+      "name": "ui",
+      "path": "packages/ui",
+    },
+  ],
+  "settings": {},
+}
