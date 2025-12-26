@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5174",
+    "start": "vite preview",
     "build": "vite build && tsc",
     "preview": "vite preview",
     "test": "vitest run --passWithNoTests",

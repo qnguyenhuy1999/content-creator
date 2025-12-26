@@ -19,7 +19,8 @@
     "./styles.css": "./src/styles/styles.css"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5175",
+    "start": "vite preview",
     "build": "tsc -b && vite build",
     "lint": "eslint",
     "format": "prettier --write .",

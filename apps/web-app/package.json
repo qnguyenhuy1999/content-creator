@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --port 5173",
+    "start": "vite preview",
     "build": "vite build && tsc",
     "preview": "vite preview",
     "test": "vitest run --passWithNoTests",

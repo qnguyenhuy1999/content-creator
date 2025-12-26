@@ -3,7 +3,6 @@
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
     "test": "turbo test",
@@ -12,6 +11,17 @@
     "clean": "pnpm -r exec rm -rf node_modules dist .next .tanstack build .turbo",
     "bootstrap": "pnpm install",
     "install:ci": "pnpm install --frozen-lockfile",
+    "ci": "turbo lint && turbo test && turbo typecheck",
+    "db:generate": "pnpm --filter=@content-creator/database run db:generate",
+    "db:migrate": "pnpm --filter=@content-creator/database run db:migrate",
+    "db:seed": "pnpm --filter=@content-creator/database run db:seed",
+    "db:studio": "pnpm --filter=@content-creator/database run db:studio",
+    "admin:dev": "pnpm --filter=@content-creator/admin run dev",
+    "web-app:dev": "pnpm --filter=@content-creator/web-app run dev",
+    "web-landing:dev": "pnpm --filter=@content-creator/web-landing run dev",
+    "api:dev": "pnpm --filter=@content-creator/api run dev",
+    "admin-api:dev": "pnpm --filter=@content-creator/admin-api run dev",
+    "packages/ui:dev": "pnpm --filter=@content-creator/ui run dev",
     "prepare": "turbo lint"
   },
   "devDependencies": {
