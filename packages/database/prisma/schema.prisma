@@ -1,95 +1,381 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
+  output = "./generated"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-// =============================================
-// USER & AUTH
-// =============================================
+// =========================
+// ENUMS
+// =========================
+
+enum UserRole {
+  user
+  admin
+}
+
+enum UserStatus {
+  active
+  banned
+  deleted
+}
+
+enum VerifyTokenType {
+  verify_email
+  reset_password
+}
+
+enum SubscriptionStatus {
+  trialing
+  active
+  past_due
+  canceled
+  incomplete
+}
+
+enum Platform {
+  linkedin
+  twitter
+  blog
+  email
+}
+
+enum ContentStatus {
+  draft
+  ready
+  scheduled
+  published
+}
+
+enum ContentSourceType {
+  ai_generated
+  manual
+}
+
+enum TemplateScope {
+  global
+  user
+}
+
+// =========================
+// USERS & IDENTITY
+// =========================
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  emailVerified DateTime?
-  image         String?
-  role          UserRole  @default(USER)
+  id              String     @id @default(uuid())
+  email           String     @unique
+  passwordHash    String?    @map("password_hash")
+  role            UserRole   @default(user)
+  isEmailVerified Boolean    @default(false) @map("is_email_verified")
+  status          UserStatus @default(active)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  // Relations
-  sessions Session[]
-  accounts Account[]
+  profile            Profile?
+  accounts           Account[]
+  refreshTokens      RefreshToken[]
+  verifyTokens       VerifyToken[]
+  subscriptions      Subscription[]
+  contentItems       ContentItem[]
+  contentGenerations ContentGeneration[]
+  userSettings       UserSettings?
+  onboardingAnswers  OnboardingAnswer[]
+  templates          Template[]
+  auditLogs          AuditLog[]
 
   @@map("users")
 }
 
-enum UserRole {
-  USER
-  ADMIN
+// =========================
+// PROFILES
+// =========================
+
+model Profile {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+
+  fullName        String? @map("full_name")
+  avatarUrl       String? @map("avatar_url")
+  bio             String?
+  timeZone        String? @map("time_zone")
+  defaultLanguage String? @map("default_language")
+  defaultPlatform String? @map("default_platform")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
 }
 
+// =========================
+// EXTERNAL ACCOUNTS (OAUTH)
+// =========================
+
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
   provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+  providerAccountId String    @map("provider_account_id")
+  accessToken       String?
+  refreshToken      String?
+  expiresAt         DateTime?
+  scopes            String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
   @@map("accounts")
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
+// =========================
+// TOKENS
+// =========================
+
+model RefreshToken {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
+  token     String
+  userAgent String? @map("user_agent")
+  ipAddress String? @map("ip_address")
+
+  isRevoked Boolean   @default(false) @map("is_revoked")
+  revokedAt DateTime? @map("revoked_at")
+  expiresAt DateTime  @map("expires_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("sessions")
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+model VerifyToken {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
 
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+  token      String
+  type       VerifyTokenType
+  expiresAt  DateTime        @map("expires_at")
+  consumedAt DateTime?       @map("consumed_at")
+  metadata   Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token, type])
+  @@map("verify_tokens")
 }
 
-// =============================================
-// EXAMPLE: Add your domain models below
-// =============================================
+// =========================
+// PLANS & SUBSCRIPTIONS
+// =========================
 
-// model Post {
-//   id        String   @id @default(cuid())
-//   title     String
-//   content   String?
-//   published Boolean  @default(false)
-//   authorId  String
-//   
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   
-//   @@map("posts")
-// }
+model Plan {
+  id                   String   @id @default(uuid())
+  code                 String   @unique
+  name                 String
+  priceMonthly         Decimal? @map("price_monthly")
+  priceYearly          Decimal? @map("price_yearly")
+  contentLimitPerMonth Int?     @map("content_limit_per_month")
+  maxTeamMembers       Int?     @map("max_team_members")
+  features             Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+  planId String @map("plan_id")
+
+  stripeCustomerId     String? @map("stripe_customer_id")
+  stripeSubscriptionId String? @map("stripe_subscription_id")
+
+  status             SubscriptionStatus
+  currentPeriodStart DateTime           @map("current_period_start")
+  currentPeriodEnd   DateTime           @map("current_period_end")
+  cancelAtPeriodEnd  Boolean            @default(false) @map("cancel_at_period_end")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan  Plan                @relation(fields: [planId], references: [id])
+  usage SubscriptionUsage[]
+
+  @@index([userId])
+  @@index([status])
+  @@map("subscriptions")
+}
+
+model SubscriptionUsage {
+  id             String @id @default(uuid())
+  subscriptionId String @map("subscription_id")
+
+  periodStart           DateTime @map("period_start")
+  periodEnd             DateTime @map("period_end")
+  contentGeneratedCount Int      @default(0) @map("content_generated_count")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@unique([subscriptionId, periodStart])
+  @@map("subscription_usage")
+}
+
+// =========================
+// CONTENT CORE
+// =========================
+
+model ContentItem {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
+  platform    Platform
+  language    String
+  title       String?
+  body        String
+  status      ContentStatus
+  scheduledAt DateTime?         @map("scheduled_at")
+  publishedAt DateTime?         @map("published_at")
+  sourceType  ContentSourceType @map("source_type")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  generations ContentGeneration[]
+
+  @@index([userId])
+  @@index([platform])
+  @@index([status])
+  @@map("content_items")
+}
+
+model ContentGeneration {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
+  platform      Platform
+  language      String
+  topic         String
+  tone          String?
+  promptPayload Json     @map("prompt_payload")
+  rawResponse   Json?
+  variantCount  Int      @map("variant_count")
+
+  contentItemId String? @map("content_item_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contentItem ContentItem? @relation(fields: [contentItemId], references: [id])
+
+  @@index([userId])
+  @@index([contentItemId])
+  @@map("content_generations")
+}
+
+// =========================
+// TEMPLATES
+// =========================
+
+model Template {
+  id     String        @id @default(uuid())
+  scope  TemplateScope
+  userId String?       @map("user_id")
+
+  name           String
+  description    String?
+  platform       Platform
+  language       String
+  promptTemplate String   @map("prompt_template")
+  fields         Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([scope])
+  @@index([userId])
+  @@map("templates")
+}
+
+// =========================
+// SETTINGS & ONBOARDING
+// =========================
+
+model UserSettings {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+
+  onboardingCompleted Boolean @default(false) @map("onboarding_completed")
+  defaultTone         String?
+  defaultLanguage     String?
+  defaultPlatform     String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model OnboardingAnswer {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
+  questionKey String @map("question_key")
+  answer      String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("onboarding_answers")
+}
+
+// =========================
+// AUDIT LOGS
+// =========================
+
+model AuditLog {
+  id     String  @id @default(uuid())
+  userId String? @map("user_id")
+
+  action   String
+  metadata Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([action])
+  @@map("audit_logs")
+}
+

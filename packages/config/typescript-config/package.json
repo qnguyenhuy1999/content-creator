@@ -1,0 +1,17 @@
+{
+  "name": "@content-creator/typescript-config",
+  "version": "0.1.0",
+  "private": true,
+  "main": "base.json",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "start": "exit 0",
+    "start:prod": "exit 0"
+  },
+  "files": [
+    "base.json",
+    "library.json",
+    "nestjs.json",
+    "nextjs.json"
+  ]
+}

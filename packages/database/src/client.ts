@@ -1,28 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv";
+import { PrismaClient } from "../prisma/generated";
 
-const prismaClientSingleton = () => {
-  return new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  });
-};
+// Shared Prisma client instance for the entire package.
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 
-declare global {
-  // eslint-disable-next-line no-var
-  var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>;
-}
+export const prisma = new PrismaClient({ adapter });
 
-export const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
-
-if (process.env.NODE_ENV !== "production") {
-  globalThis.prismaGlobal = prisma;
-}
-
-export default prisma;
+export type { Prisma, PrismaClient } from "@prisma/client";

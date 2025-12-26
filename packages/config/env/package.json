@@ -1,0 +1,41 @@
+{
+  "name": "@content-creator/env",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./web": {
+      "types": "./dist/web.d.ts",
+      "default": "./dist/web.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.cache/*.tsbuildinfo"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@content-creator/eslint-preset": "workspace:*",
+    "@content-creator/typescript-config": "workspace:*",
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.5"
+  }
+}

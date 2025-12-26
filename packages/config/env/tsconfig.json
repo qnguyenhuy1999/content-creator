@@ -1,0 +1,19 @@
+{
+  "extends": "../typescript-config/library.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "node_modules/.cache/env.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@content-creator/*": [
+        "../*/src",
+        "../../packages/*/src",
+        "../../apps/*/src"
+      ]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

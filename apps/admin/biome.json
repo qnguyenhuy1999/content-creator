@@ -1,6 +1,8 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
-	"extends": ["@content-creator/config/biome"],
+	"extends": [
+		"../../packages/config/biome-config/base.json"
+	],
 	"files": {
 		"includes": [
 			"src/**/*",

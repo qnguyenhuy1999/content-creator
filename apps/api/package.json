@@ -23,6 +23,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@content-creator/database": "workspace:*",
     "@nestjs/common": "10.3.8",
     "@nestjs/core": "10.3.8",
     "@nestjs/platform-express": "10.3.8",
@@ -30,7 +31,7 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@content-creator/config": "workspace:*",
+    "@content-creator/eslint-preset": "workspace:*",
     "@eslint/js": "~9.18.0",
     "@nestjs/cli": "10.3.2",
     "@nestjs/schematics": "10.1.1",

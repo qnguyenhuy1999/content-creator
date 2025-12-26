@@ -1,2 +1,3 @@
-export * from "@prisma/client";
-export { default, prisma } from "./client";
+export { prisma } from "./client";
+export type { Prisma, PrismaClient } from "./client";
+export { DatabaseModule } from "./database.module";

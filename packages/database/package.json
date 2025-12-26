@@ -2,13 +2,20 @@
   "name": "@content-creator/database",
   "version": "0.0.1",
   "private": true,
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./client": "./src/client.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    }
   },
   "scripts": {
+    "build": "tsc -b",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
@@ -16,15 +23,21 @@
     "db:studio": "prisma studio",
     "db:seed": "tsx src/seed.ts",
     "typecheck": "tsc --noEmit",
-    "test": "echo \"no tests\""
+    "test": "echo \"no tests\"",
+    "prepare": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0"
+    "@prisma/client": "^7.1.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@types/node": "~20.17.9",
-    "prisma": "^5.22.0",
-    "tsx": "^4.19.2",
-    "typescript": "~5.7.3"
+    "@content-creator/eslint-preset": "workspace:*",
+    "@content-creator/typescript-config": "workspace:*",
+    "prisma": "^7.1.0",
+    "@prisma/adapter-pg": "^7.1.0",
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0"
   }
 }

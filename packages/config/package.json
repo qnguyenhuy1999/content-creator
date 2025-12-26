@@ -1,33 +1,19 @@
 {
   "name": "@content-creator/config",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "./index.ts",
-  "types": "./index.ts",
-  "exports": {
-    "./eslint": "./eslint.config.js",
-    "./prettier": "./prettier.config.js",
-    "./biome": "./biome.json",
-    "./typescript/base": "./tsconfig.base.json",
-    "./typescript/node": "./tsconfig.node.json",
-    "./typescript/browser": "./tsconfig.browser.json",
-    "./env": "./src/env.ts"
-  },
-  "scripts": {
-    "format": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "format:check": "prettier --check .",
-    "test": "echo \"no tests\""
-  },
+  "main": "index.js",
   "dependencies": {
-    "zod": "^3.23.8"
+    "@content-creator/env": "workspace:*",
+    "@content-creator/eslint-rules": "workspace:*",
+    "@typescript-eslint/parser": "^8.20.0",
+    "typescript-eslint": "^8.20.0"
   },
-  "devDependencies": {
-    "@biomejs/biome": "~2.2.4",
-    "@eslint/js": "^9.18.0",
-    "@types/node": "~20.17.9",
-    "prettier": "^3.4.2",
-    "typescript": "~5.7.3"
+  "exports": {
+    "./eslint": "./eslint-preset/index.js",
+    "./typescript": "./typescript-config/base.json",
+    "./env": "./env/src/index.ts",
+    "./biome": "./biome-config/base.json"
   }
 }

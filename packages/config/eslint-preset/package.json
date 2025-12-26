@@ -1,0 +1,26 @@
+{
+  "name": "@content-creator/eslint-preset",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "exit 0",
+    "dev": "exit 0",
+    "type-check": "exit 0",
+    "clean": "rm -rf dist node_modules/.cache/*.tsbuildinfo"
+  },
+  "dependencies": {
+    "@content-creator/eslint-rules": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint-config-next": "16.0.7",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.1.0"
+  }
+}
