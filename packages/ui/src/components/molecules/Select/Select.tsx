@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
 import {
-  Select as SelectRoot,
   SelectContent,
   SelectItem,
+  Select as SelectRoot,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";

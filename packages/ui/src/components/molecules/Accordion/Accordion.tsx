@@ -1,12 +1,10 @@
-"use client";
-
-import * as React from "react";
 import {
-  Accordion as AccordionRoot,
   AccordionContent,
   AccordionItem,
+  Accordion as AccordionRoot,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import * as React from "react";
 
 export interface AccordionItem {
   value: string;
@@ -14,34 +12,29 @@ export interface AccordionItem {
   content: React.ReactNode;
 }
 
-export interface AccordionProps {
-  items: AccordionItem[];
-  type?: "single" | "multiple";
-  defaultValue?: string | string[];
-  value?: string | string[];
-  onValueChange?: (value: string | string[]) => void;
-  collapsible?: boolean;
-  className?: string;
-}
+export type AccordionProps =
+  | (Omit<React.ComponentProps<typeof AccordionRoot>, "type"> & {
+      items: AccordionItem[];
+      type: "single";
+      collapsible?: boolean;
+      value?: string;
+      defaultValue?: string;
+      onValueChange?: (value: string) => void;
+    })
+  | (Omit<React.ComponentProps<typeof AccordionRoot>, "type"> & {
+      items: AccordionItem[];
+      type: "multiple";
+      collapsible?: boolean;
+      value?: string[];
+      defaultValue?: string[];
+      onValueChange?: (value: string[]) => void;
+    });
 
-export function Accordion({
-  items,
-  type = "single",
-  defaultValue,
-  value,
-  onValueChange,
-  collapsible,
-  className,
-}: AccordionProps) {
+export function Accordion(props: AccordionProps) {
+  const { items, ...rootProps } = props;
+
   return (
-    <AccordionRoot
-      type={type}
-      defaultValue={defaultValue}
-      value={value}
-      onValueChange={onValueChange}
-      collapsible={collapsible}
-      className={className}
-    >
+    <AccordionRoot {...rootProps}>
       {items.map((item) => (
         <AccordionItem key={item.value} value={item.value}>
           <AccordionTrigger>{item.trigger}</AccordionTrigger>

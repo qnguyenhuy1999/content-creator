@@ -1,13 +1,12 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "extends": "../../packages/config/typescript-config/library.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
-  }
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": [".", ".storybook/**/*"],
+  "exclude": ["node_modules", "dist", "infra"]
 }

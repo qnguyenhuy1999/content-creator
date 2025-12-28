@@ -1,7 +1,6 @@
 "use client";
 
 import { Slider as SliderRoot } from "@/components/ui/slider";
-import * as React from "react";
 
 export interface SliderProps {
   value?: number[];

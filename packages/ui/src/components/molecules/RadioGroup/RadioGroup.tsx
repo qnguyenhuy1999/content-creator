@@ -1,11 +1,10 @@
 "use client";
 
-import * as React from "react";
-import {
-  RadioGroup as RadioGroupRoot,
-  RadioGroupItem,
-} from "@/components/ui/radio-group";
 import { Label } from "@/components/atoms/Label/Label";
+import {
+  RadioGroupItem,
+  RadioGroup as RadioGroupRoot,
+} from "@/components/ui/radio-group";
 
 export interface RadioGroupOption {
   value: string;

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
+import type { DateRange } from "react-day-picker";
 import { Calendar } from "./Calendar";
 
 const meta: Meta<typeof Calendar> = {
@@ -28,7 +29,9 @@ export const Multiple: Story = {
       <Calendar
         mode="multiple"
         selected={dates}
-        onSelect={(selected) => setDates(selected as Date[])}
+        onSelect={(selected) => {
+          if (Array.isArray(selected)) setDates(selected);
+        }}
       />
     );
   },
@@ -36,18 +39,8 @@ export const Multiple: Story = {
 
 export const Range: Story = {
   render: () => {
-    const [range, setRange] = React.useState<
-      { from?: Date; to?: Date } | undefined
-    >();
-    return (
-      <Calendar
-        mode="range"
-        selected={range}
-        onSelect={(selected) =>
-          setRange(selected as { from?: Date; to?: Date })
-        }
-      />
-    );
+    const [range, setRange] = React.useState<DateRange | undefined>();
+    return <Calendar mode="range" selected={range} onSelect={setRange} />;
   },
 };
 

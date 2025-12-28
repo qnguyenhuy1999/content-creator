@@ -1,9 +1,7 @@
-"use client";
-
 import {
-  Avatar as AvatarRoot,
   AvatarFallback,
   AvatarImage,
+  Avatar as AvatarRoot,
 } from "@/components/ui/avatar";
 import * as React from "react";
 

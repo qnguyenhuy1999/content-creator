@@ -1,11 +1,7 @@
+import { Header } from '@/components/layout/Header';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import ThemeProviderClient from '../components/ThemeProviderClient';
 import './globals.css';
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +15,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <ThemeProviderClient>
+          <div className="min-h-screen flex flex-col bg-background">
+            <Header />
+
+            {children}
+          </div>
+        </ThemeProviderClient>
+      </body>
     </html>
   );
 }

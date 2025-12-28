@@ -1,20 +1,15 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Library",
   "extends": "./base.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "dist",
-    "noEmit": false,
-    "sourceMap": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "jsx": "react-jsx",
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  }
 }

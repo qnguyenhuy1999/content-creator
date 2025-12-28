@@ -3,18 +3,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@content-creator/*": ["../../packages/*/src"]
+      "@/*": ["./src/*", "../../packages/ui/src/*"],
+      "@content-creator/ui/*": ["../../packages/ui/src/*"]
     },
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "incremental": true,
-    "isolatedModules": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "next.config.mjs",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next"]
 }
