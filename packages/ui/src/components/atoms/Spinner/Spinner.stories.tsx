@@ -43,4 +43,3 @@ export const InButton: Story = {
     </button>
   ),
 };
-

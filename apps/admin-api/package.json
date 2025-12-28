@@ -31,7 +31,7 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@content-creator/eslint-preset": "workspace:*",
+    "@content-creator/config": "workspace:*",
     "@eslint/js": "~9.18.0",
     "@nestjs/cli": "10.3.2",
     "@nestjs/schematics": "10.1.1",

@@ -24,12 +24,14 @@ export const Default: Story = {
       {
         value: "item2",
         trigger: "Is it styled?",
-        content: "Yes. It comes with default styles that match the other components.",
+        content:
+          "Yes. It comes with default styles that match the other components.",
       },
       {
         value: "item3",
         trigger: "Is it animated?",
-        content: "Yes. It's animated by default, but you can disable it if needed.",
+        content:
+          "Yes. It's animated by default, but you can disable it if needed.",
       },
     ],
     type: "single",
@@ -60,4 +62,3 @@ export const Multiple: Story = {
     defaultValue: ["item1"],
   },
 };
-

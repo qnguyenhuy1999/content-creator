@@ -38,4 +38,3 @@ export const WithIcon: Story = {
     icon: <AlertCircle />,
   },
 };
-

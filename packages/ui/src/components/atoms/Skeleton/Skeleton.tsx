@@ -6,4 +6,3 @@ export interface SkeletonProps extends React.ComponentProps<"div"> {}
 export function Skeleton({ className, ...props }: SkeletonProps) {
   return <ShadcnSkeleton className={className} {...props} />;
 }
-

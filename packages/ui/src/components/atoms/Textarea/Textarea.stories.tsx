@@ -50,4 +50,3 @@ export const Resizable: Story = {
     className: "resize",
   },
 };
-

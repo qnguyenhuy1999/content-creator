@@ -7,4 +7,3 @@ export interface ProgressProps
 export function Progress({ className, value, ...props }: ProgressProps) {
   return <ShadcnProgress className={className} value={value} {...props} />;
 }
-

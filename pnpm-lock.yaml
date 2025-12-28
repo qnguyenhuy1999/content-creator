@@ -106,9 +106,9 @@ importers:
         specifier: ^7.8.1
         version: 7.8.2
     devDependencies:
-      '@content-creator/eslint-preset':
+      '@content-creator/config':
         specifier: workspace:*
-        version: link:../../packages/config/eslint-preset
+        version: link:../../packages/config
       '@eslint/js':
         specifier: ~9.18.0
         version: 9.18.0
@@ -194,9 +194,9 @@ importers:
         specifier: ^7.8.1
         version: 7.8.2
     devDependencies:
-      '@content-creator/eslint-preset':
+      '@content-creator/config':
         specifier: workspace:*
-        version: link:../../packages/config/eslint-preset
+        version: link:../../packages/config
       '@eslint/js':
         specifier: ~9.18.0
         version: 9.18.0
@@ -343,9 +343,12 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@content-creator/eslint-preset':
+      '@content-creator/config':
         specifier: workspace:*
-        version: link:../../packages/config/eslint-preset
+        version: link:../../packages/config
+      '@content-creator/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@eslint/compat':
         specifier: ^1.2.4
         version: 1.4.1(eslint@9.39.2(jiti@2.6.1))

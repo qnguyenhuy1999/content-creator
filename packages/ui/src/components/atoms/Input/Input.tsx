@@ -6,4 +6,3 @@ export interface InputProps extends React.ComponentProps<"input"> {}
 export function Input({ className, type, ...props }: InputProps) {
   return <ShadcnInput className={className} type={type} {...props} />;
 }
-

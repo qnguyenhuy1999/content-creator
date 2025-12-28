@@ -18,7 +18,8 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@content-creator/eslint-preset": "workspace:*",
+    "@content-creator/config": "workspace:*",
+    "@content-creator/ui": "workspace:*",
     "@eslint/compat": "^1.2.4",
     "@eslint/js": "^9.18.0",
     "@tailwindcss/postcss": "~4.0.0",

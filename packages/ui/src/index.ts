@@ -37,10 +37,16 @@ export { Tabs } from "./components/molecules/Tabs/Tabs";
 export type { TabsProps, TabsItem } from "./components/molecules/Tabs/Tabs";
 
 export { Select } from "./components/molecules/Select/Select";
-export type { SelectProps, SelectOption } from "./components/molecules/Select/Select";
+export type {
+  SelectProps,
+  SelectOption,
+} from "./components/molecules/Select/Select";
 
 export { Dialog } from "./components/molecules/Dialog/Dialog";
-export type { DialogProps, DialogAction } from "./components/molecules/Dialog/Dialog";
+export type {
+  DialogProps,
+  DialogAction,
+} from "./components/molecules/Dialog/Dialog";
 
 export { DropdownMenu } from "./components/molecules/DropdownMenu/DropdownMenu";
 export type {
@@ -50,7 +56,10 @@ export type {
 } from "./components/molecules/DropdownMenu/DropdownMenu";
 
 export { Accordion } from "./components/molecules/Accordion/Accordion";
-export type { AccordionProps, AccordionItem } from "./components/molecules/Accordion/Accordion";
+export type {
+  AccordionProps,
+  AccordionItem,
+} from "./components/molecules/Accordion/Accordion";
 
 export { Card } from "./components/molecules/Card/Card";
 export type { CardProps } from "./components/molecules/Card/Card";
@@ -88,7 +97,10 @@ export type {
 } from "./components/molecules/Table/Table";
 
 export { Chart } from "./components/molecules/Chart/Chart";
-export type { ChartProps, ChartConfig } from "./components/molecules/Chart/Chart";
+export type {
+  ChartProps,
+  ChartConfig,
+} from "./components/molecules/Chart/Chart";
 export {
   ChartTooltip,
   ChartTooltipContent,
@@ -101,4 +113,3 @@ export type { SliderProps } from "./components/molecules/Slider/Slider";
 
 export { Calendar } from "./components/molecules/Calendar/Calendar";
 export type { CalendarProps } from "./components/molecules/Calendar/Calendar";
-

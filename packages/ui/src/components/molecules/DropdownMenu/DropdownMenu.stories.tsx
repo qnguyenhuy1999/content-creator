@@ -21,7 +21,11 @@ export const Default: Story = {
       items={[
         { label: "Profile", onClick: () => alert("Profile clicked") },
         { label: "Settings", onClick: () => alert("Settings clicked") },
-        { label: "Logout", onClick: () => alert("Logout clicked"), variant: "destructive" },
+        {
+          label: "Logout",
+          onClick: () => alert("Logout clicked"),
+          variant: "destructive",
+        },
       ]}
     />
   ),
@@ -43,7 +47,11 @@ export const WithGroups: Story = {
           label: "Actions",
           items: [
             { label: "Download", onClick: () => alert("Download") },
-            { label: "Delete", onClick: () => alert("Delete"), variant: "destructive" },
+            {
+              label: "Delete",
+              onClick: () => alert("Delete"),
+              variant: "destructive",
+            },
           ],
         },
       ]}
@@ -57,7 +65,11 @@ export const WithDisabledItem: Story = {
       trigger={<Button variant="outline">Menu</Button>}
       items={[
         { label: "Enabled Item", onClick: () => alert("Enabled") },
-        { label: "Disabled Item", onClick: () => alert("Disabled"), disabled: true },
+        {
+          label: "Disabled Item",
+          onClick: () => alert("Disabled"),
+          disabled: true,
+        },
         { label: "Another Enabled", onClick: () => alert("Another") },
       ]}
     />
@@ -94,4 +106,3 @@ export const DifferentPositions: Story = {
     </div>
   ),
 };
-

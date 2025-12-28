@@ -43,7 +43,9 @@ export const Range: Story = {
       <Calendar
         mode="range"
         selected={range}
-        onSelect={(selected) => setRange(selected as { from?: Date; to?: Date })}
+        onSelect={(selected) =>
+          setRange(selected as { from?: Date; to?: Date })
+        }
       />
     );
   },
@@ -65,13 +67,6 @@ export const WithDisabledDates: Story = {
 export const MultipleMonths: Story = {
   render: () => {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
-    return (
-      <Calendar
-        selected={date}
-        onSelect={setDate}
-        numberOfMonths={2}
-      />
-    );
+    return <Calendar selected={date} onSelect={setDate} numberOfMonths={2} />;
   },
 };
-

@@ -14,6 +14,7 @@
     "./eslint": "./eslint-preset/index.js",
     "./typescript": "./typescript-config/base.json",
     "./env": "./env/src/index.ts",
-    "./biome": "./biome-config/base.json"
+    "./biome": "./biome-config/base.json",
+    "./prettier": "./prettier-config/index.js"
   }
 }

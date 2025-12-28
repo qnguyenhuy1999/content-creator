@@ -6,7 +6,9 @@ import * as React from "react";
 export interface CalendarProps {
   mode?: "single" | "multiple" | "range";
   selected?: Date | Date[] | { from?: Date; to?: Date };
-  onSelect?: (date: Date | Date[] | { from?: Date; to?: Date } | undefined) => void;
+  onSelect?: (
+    date: Date | Date[] | { from?: Date; to?: Date } | undefined,
+  ) => void;
   defaultMonth?: Date;
   numberOfMonths?: number;
   disabled?: boolean | ((date: Date) => boolean);
@@ -34,4 +36,3 @@ export function Calendar({
     />
   );
 }
-

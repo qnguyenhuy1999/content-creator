@@ -50,4 +50,3 @@ export const Pressed: Story = {
     );
   },
 };
-

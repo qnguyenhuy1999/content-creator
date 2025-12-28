@@ -1,3 +1,3 @@
-import eslintConfig from "@content-creator/eslint-preset";
+import eslintConfig from "@content-creator/config/eslint";
 
 export default eslintConfig;

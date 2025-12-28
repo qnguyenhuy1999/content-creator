@@ -9,4 +9,3 @@ export interface SwitchProps
 export function Switch({ className, ...props }: SwitchProps) {
   return <ShadcnSwitch className={className} {...props} />;
 }
-

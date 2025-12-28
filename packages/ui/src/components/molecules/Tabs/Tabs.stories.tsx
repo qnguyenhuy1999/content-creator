@@ -73,4 +73,3 @@ export const ThreeTabs: Story = {
     defaultValue: "overview",
   },
 };
-

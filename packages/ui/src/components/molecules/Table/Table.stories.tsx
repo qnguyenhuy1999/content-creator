@@ -110,4 +110,3 @@ export const WithFooter: Story = {
     </div>
   ),
 };
-

@@ -50,4 +50,3 @@ export const Simple: Story = {
     children: <p>Simple card with just content.</p>,
   },
 };
-

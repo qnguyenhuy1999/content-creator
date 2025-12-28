@@ -66,7 +66,9 @@ export function DropdownMenu({
             // It's a group
             return (
               <React.Fragment key={index}>
-                {item.label && <DropdownMenuLabel>{item.label}</DropdownMenuLabel>}
+                {item.label && (
+                  <DropdownMenuLabel>{item.label}</DropdownMenuLabel>
+                )}
                 {renderItems(item.items)}
                 {index < items.length - 1 && <DropdownMenuSeparator />}
               </React.Fragment>
@@ -74,13 +76,10 @@ export function DropdownMenu({
           }
           // It's a single item
           return (
-            <React.Fragment key={index}>
-              {renderItems([item])}
-            </React.Fragment>
+            <React.Fragment key={index}>{renderItems([item])}</React.Fragment>
           );
         })}
       </DropdownMenuContent>
     </DropdownMenuRoot>
   );
 }
-

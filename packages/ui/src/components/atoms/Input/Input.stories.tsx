@@ -45,4 +45,3 @@ export const Email: Story = {
     placeholder: "Enter email",
   },
 };
-

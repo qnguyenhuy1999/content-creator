@@ -15,11 +15,7 @@ type Story = StoryObj<typeof Avatar>;
 
 export const Default: Story = {
   render: () => (
-    <Avatar
-      src="https://github.com/shadcn.png"
-      alt="Avatar"
-      fallback="CN"
-    />
+    <Avatar src="https://github.com/shadcn.png" alt="Avatar" fallback="CN" />
   ),
 };
 
@@ -29,11 +25,7 @@ export const WithFallback: Story = {
 
 export const WithImage: Story = {
   render: () => (
-    <Avatar
-      src="https://github.com/shadcn.png"
-      alt="shadcn"
-      fallback="SC"
-    />
+    <Avatar src="https://github.com/shadcn.png" alt="shadcn" fallback="SC" />
   ),
 };
 
@@ -61,4 +53,3 @@ export const Sizes: Story = {
     </div>
   ),
 };
-

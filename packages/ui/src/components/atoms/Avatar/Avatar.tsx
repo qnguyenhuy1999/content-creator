@@ -22,4 +22,3 @@ export function Avatar({ src, alt, fallback, className }: AvatarProps) {
     </AvatarRoot>
   );
 }
-

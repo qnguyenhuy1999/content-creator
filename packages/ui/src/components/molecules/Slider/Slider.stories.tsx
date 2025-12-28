@@ -31,9 +31,7 @@ export const WithValue: Story = {
 };
 
 export const Range: Story = {
-  render: () => (
-    <Slider defaultValue={[20, 80]} max={100} className="w-64" />
-  ),
+  render: () => <Slider defaultValue={[20, 80]} max={100} className="w-64" />,
 };
 
 export const CustomRange: Story = {
@@ -43,8 +41,5 @@ export const CustomRange: Story = {
 };
 
 export const Disabled: Story = {
-  render: () => (
-    <Slider defaultValue={[50]} disabled className="w-64" />
-  ),
+  render: () => <Slider defaultValue={[50]} disabled className="w-64" />,
 };
-

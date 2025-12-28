@@ -47,4 +47,3 @@ export const ThreeQuarters: Story = {
     value: 75,
   },
 };
-

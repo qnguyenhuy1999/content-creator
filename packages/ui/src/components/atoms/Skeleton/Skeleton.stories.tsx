@@ -45,4 +45,3 @@ export const Card: Story = {
     </div>
   ),
 };
-
